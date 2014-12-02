@@ -40,7 +40,8 @@ public class Main {
 			model.addVariable(v);
 		}
 
-		model.setMaximisation(true);
+		// No need to do this if you call maximise() and/or minimise() rather than solve()
+//		model.setMaximisation(true);
 
 		{
 			Expression expression = model.addExpression("C1").upper(10);
@@ -50,23 +51,36 @@ public class Main {
 			expression.setLinearFactor(variables.get(3), 2);
 		}
 
-		for(Variable v:variables){
-			Expression expression = model.addExpression("V_1_"+v.getName()).lower(0);
-			expression.setLinearFactor(v, 1);
-		}
+//		for(Variable v:variables){
+//			Expression expression = model.addExpression("V_1_"+v.getName()).lower(0);
+//			expression.setLinearFactor(v, 1);
+//		}
+//
+//		for(Variable v:variables){
+//			Expression expression = model.addExpression("V_2_"+v.getName()).upper(1);
+//			expression.setLinearFactor(v, 1);
+//		}
+//
+//		if(IP) {
+//			for (Variable v : model.getVariables()) {
+//				v.setInteger(true);
+//			}
+//		}
 
-		for(Variable v:variables){
-			Expression expression = model.addExpression("V_2_"+v.getName()).upper(1);
-			expression.setLinearFactor(v, 1);
-		}
+	      // Just to show you alternatives
+        if (IP) {
+            for(Variable v:variables){
+                v.binary();
+            }
+        } else {
+            for(Variable v:variables){
+                v.lower(0).upper(1);
+            }
+        }
 
-		if(IP) {
-			for (Variable v : model.getVariables()) {
-				v.setInteger(true);
-			}
-		}
-
-		printResult(model.solve());
+        // maximise() and/or minimise() is recommnded rather than solve()
+        printResult(model.maximise());
+//		printResult(model.solve());
 	}
 
 	public static void main(String[] args){
