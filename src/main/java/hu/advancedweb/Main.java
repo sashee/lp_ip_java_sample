@@ -40,9 +40,6 @@ public class Main {
 			model.addVariable(v);
 		}
 
-		// No need to do this if you call maximise() and/or minimise() rather than solve()
-//		model.setMaximisation(true);
-
 		{
 			Expression expression = model.addExpression("C1").upper(10);
 			expression.setLinearFactor(variables.get(0), 6);
@@ -50,6 +47,8 @@ public class Main {
 			expression.setLinearFactor(variables.get(2), 5);
 			expression.setLinearFactor(variables.get(3), 2);
 		}
+
+//      These sets the variable bounds and constraints
 
 //		for(Variable v:variables){
 //			Expression expression = model.addExpression("V_1_"+v.getName()).lower(0);
@@ -67,7 +66,7 @@ public class Main {
 //			}
 //		}
 
-	      // Just to show you alternatives
+//      Or use shorthands
         if (IP) {
             for(Variable v:variables){
                 v.binary();
@@ -78,9 +77,7 @@ public class Main {
             }
         }
 
-        // maximise() and/or minimise() is recommnded rather than solve()
         printResult(model.maximise());
-//		printResult(model.solve());
 	}
 
 	public static void main(String[] args){
