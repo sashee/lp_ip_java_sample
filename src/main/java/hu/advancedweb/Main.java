@@ -42,22 +42,22 @@ public class Main {
 
 		{
 			Expression expression = model.addExpression("C1").upper(10);
-			expression.setLinearFactor(variables.get(0), 6);
-			expression.setLinearFactor(variables.get(1), 3);
-			expression.setLinearFactor(variables.get(2), 5);
-			expression.setLinearFactor(variables.get(3), 2);
+			expression.set(variables.get(0), 6);
+			expression.set(variables.get(1), 3);
+			expression.set(variables.get(2), 5);
+			expression.set(variables.get(3), 2);
 		}
 
 //      These sets the variable bounds and constraints
 
 //		for(Variable v:variables){
 //			Expression expression = model.addExpression("V_1_"+v.getName()).lower(0);
-//			expression.setLinearFactor(v, 1);
+//			expression.set(v, 1);
 //		}
 //
 //		for(Variable v:variables){
 //			Expression expression = model.addExpression("V_2_"+v.getName()).upper(1);
-//			expression.setLinearFactor(v, 1);
+//			expression.set(v, 1);
 //		}
 //
 //		if(IP) {
